@@ -1,0 +1,28 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: activityConsumer
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      topic: video-events
+      group-id: media-analytics-consumer-batch-test
+
+kafka:
+  batch:
+    interval:
+      ms: 5000          # Poll every 5 seconds
+    initial-delay:
+      ms: 5000          # First poll after 5 seconds
+    max-wait:
+      ms: 4000          # Wait up to 4 seconds (less than interval)
+
+logging:
+  level:
+    com.media.activityconsumer: INFO
+    org.apache.kafka: WARN
+    org.springframework.kafka: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
